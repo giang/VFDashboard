@@ -21,7 +21,9 @@ export const REGIONS = {
     name: "Vietnam",
     auth0_domain: "vin3s.au.auth0.com",
     auth0_client_id: "jE5xt50qC7oIh1f32qMzA6hGznIU5mgH",
-    auth0_audience: "https://vin3s.au.auth0.com/api/v2/",
+    // APK uses VinFast API as audience, NOT Auth0 Management API.
+    // This affects the JWT structure and Cognito identity mapping.
+    auth0_audience: "https://mobile.connected-car.vinfast.vn",
     api_base: "https://mobile.connected-car.vinfast.vn",
   },
 };
@@ -41,62 +43,6 @@ export const API_HEADERS = {
   "User-Agent": "android - vfdashboard-community-edition - 2.17.5",
 };
 
-/**
- * Core telemetry aliases — registered once on MQTT connect to trigger
- * T-Box data push for dashboard essentials (battery, doors, speed, location).
- * Single API call (~40 aliases). Heavy tiered registration removed.
- */
-export const CORE_TELEMETRY_ALIASES = [
-  "VEHICLE_STATUS_HV_BATTERY_SOC",
-  "VEHICLE_STATUS_LV_BATTERY_SOC",
-  "VEHICLE_STATUS_REMAINING_DISTANCE",
-  "VEHICLE_STATUS_ODOMETER",
-  "CHARGING_STATUS_CHARGING_STATUS",
-  "CHARGING_STATUS_CHARGING_REMAINING_TIME",
-  "CHARGE_CONTROL_CURRENT_TARGET_SOC",
-  "VEHICLE_STATUS_IGNITION_STATUS",
-  "VEHICLE_STATUS_GEAR_POSITION",
-  "VEHICLE_STATUS_VEHICLE_SPEED",
-  "VEHICLE_STATUS_HANDBRAKE_STATUS",
-  "VEHICLE_STATUS_AMBIENT_TEMPERATURE",
-  "CLIMATE_INFORMATION_DRIVER_TEMPERATURE",
-  "VEHICLE_STATUS_FRONT_LEFT_TIRE_PRESSURE",
-  "VEHICLE_STATUS_FRONT_RIGHT_TIRE_PRESSURE",
-  "VEHICLE_STATUS_REAR_LEFT_TIRE_PRESSURE",
-  "VEHICLE_STATUS_REAR_RIGHT_TIRE_PRESSURE",
-  "DOOR_AJAR_FRONT_LEFT_DOOR_STATUS",
-  "DOOR_AJAR_FRONT_RIGHT_DOOR_STATUS",
-  "DOOR_AJAR_REAR_LEFT_DOOR_STATUS",
-  "DOOR_AJAR_REAR_RIGHT_DOOR_STATUS",
-  "DOOR_TRUNK_DOOR_STATUS",
-  "REMOTE_CONTROL_DOOR_STATUS",
-  "REMOTE_CONTROL_BONNET_CONTROL_STATUS",
-  "REMOTE_CONTROL_WINDOW_STATUS",
-  "REMOTE_CONTROL_CHARGE_PORT_STATUS",
-  "VEHICLE_STATUS_FRONT_LEFT_TIRE_TEMPERATURE",
-  "VEHICLE_STATUS_FRONT_RIGHT_TIRE_TEMPERATURE",
-  "VEHICLE_STATUS_REAR_LEFT_TIRE_TEMPERATURE",
-  "VEHICLE_STATUS_REAR_RIGHT_TIRE_TEMPERATURE",
-  "PET_MODE_CONTROL_STATUS",
-  "CAMP_MODE_CONTROL_STATUS",
-  "VEHICLE_STATUS_LOCK_STATUS",
-  "CLIMATE_INFORMATION_PASSENGER_TEMPERATURE",
-  "CLIMATE_INFORMATION_DRIVER_AIR_BLOW_LEVEL",
-  "LOCATION_LATITUDE",
-  "LOCATION_LONGITUDE",
-  "VEHICLE_BEARING_DEGREE",
-  "BMS_STATUS_STATE_OF_HEALTH",
-  "BMS_STATUS_NOMINAL_CAPACITY_OF_THE_BATTERY_PACK",
-  "BMS_STATUS_BATTERY_TYPE",
-  "BMS_STATUS_BATTERY_SERIAL_NUMBER",
-  "BMS_STATUS_BATTERY_DECODED_MANUFACTURE_DATE",
-  "VINFAST_VEHICLE_IDENTIFIER_VEHICLE_MANUFACTURER",
-  "FIRMWARE_UPDATE_CURRENT_PKG_VERSION",
-  "VERSION_INFO_TBOX_SOFTWARE_VERSION",
-  "BMS_STATUS_THERMAL_RUNAWAY_WARNING",
-  "CCARSERVICE_OBJECT_BOOKING_SERVICE_STATUS",
-];
-
 // MQTT Configuration (from APK local-configuration.json)
 export const MQTT_CONFIG = {
   vn: {
@@ -109,8 +55,6 @@ export const MQTT_CONFIG = {
   },
 };
 
-// DEEP_SCAN_CONFIG removed — list_resource registration no longer used.
-// MQTT delivers telemetry data without explicit resource registration.
 
 /**
  * Backup proxy endpoints for IP rotation / failover.
