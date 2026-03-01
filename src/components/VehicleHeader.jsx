@@ -662,7 +662,7 @@ export default function VehicleHeader({ onOpenCharging, onOpenTelemetry }) {
                             key={opt.val}
                             type="button"
                             onClick={() => handleLangChange(opt.val)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-bold transition-colors ${lang === opt.val ? "bg-white text-blue-600 shadow-sm" : "text-gray-600 hover:bg-white"}`}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-bold transition-colors ${i18n.language === opt.val ? "bg-white text-blue-600 shadow-sm" : "text-gray-600 hover:bg-white"}`}
                           >
                             {opt.label}
                           </button>

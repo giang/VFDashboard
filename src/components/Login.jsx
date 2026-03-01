@@ -54,7 +54,7 @@ export default function Login({ bgImage }) {
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-md space-y-6">
         {/* Light Theme Login Card - Dashboard Style */}
-        <div className="relative rounded-3xl bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 backdrop-blur-sm">
+        <div className="relative rounded-3xl bg-white p-8 pt-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 backdrop-blur-sm">
           {/* Error Toast - Absolute Position: Above Card */}
           {error && (
             <div className="absolute bottom-full left-0 w-full flex justify-center mb-5 animate-bounce-in">
@@ -106,6 +106,44 @@ export default function Login({ bgImage }) {
               </div>
             </div>
           )}
+          {/* Language Toggle + VinFast Logo */}
+          <div className="flex justify-end mb-2">
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                </svg>
+                {i18n.language === "vi" ? "VI" : "EN"}
+                <svg className={`w-2.5 h-2.5 text-gray-400 transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {langDropdownOpen && (
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setLangDropdownOpen(false)}></div>
+                  <div className="absolute top-full right-0 mt-1 w-36 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 p-1 z-20 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+                    {[
+                      { val: "vi", label: "🇻🇳 Tiếng Việt" },
+                      { val: "en", label: "🇺🇸 English" },
+                    ].map((opt) => (
+                      <button
+                        key={opt.val}
+                        type="button"
+                        onClick={() => handleLangChange(opt.val)}
+                        className={`w-full text-left px-3 py-1.5 rounded-lg text-sm font-bold transition-colors ${i18n.language === opt.val ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
           <div className="flex justify-center mb-4">
             {/* VinFast Logo */}
             <img
@@ -156,50 +194,6 @@ export default function Login({ bgImage }) {
                 >
                   {t("login:rememberMe")}
                 </label>
-              </div>
-
-              {/* Language Selector */}
-              <div className="text-sm flex items-center bg-gray-50 px-3 py-1.5 rounded-lg">
-                <label className="font-bold text-gray-500 text-[10px] uppercase tracking-wider mr-2">
-                  {t("common:language")}
-                </label>
-                <div className="relative">
-                  <button
-                    type="button"
-                    onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                    className="flex items-center gap-1 bg-transparent text-gray-900 text-xs font-bold focus:outline-none"
-                  >
-                    {i18n.language === "vi" ? "🇻🇳 Tiếng Việt" : "🇺🇸 English"}
-                    <svg
-                      className={`w-3 h-3 text-gray-400 transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {langDropdownOpen && (
-                    <>
-                      <div className="fixed inset-0 z-10" onClick={() => setLangDropdownOpen(false)}></div>
-                      <div className="absolute top-full right-0 mt-2 w-44 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 p-1.5 z-20 animate-in fade-in zoom-in-95 duration-200 origin-top-right">
-                        {[
-                          { val: "vi", label: "🇻🇳 Tiếng Việt" },
-                          { val: "en", label: "🇺🇸 English" },
-                        ].map((opt) => (
-                          <button
-                            key={opt.val}
-                            type="button"
-                            onClick={() => handleLangChange(opt.val)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-bold transition-colors ${i18n.language === opt.val ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
-                          >
-                            {opt.label}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
               </div>
 
               <div className="text-sm flex items-center bg-gray-50 px-3 py-1.5 rounded-lg">
