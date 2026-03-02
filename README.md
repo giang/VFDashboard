@@ -1,9 +1,11 @@
-# VinFast Dashboard - VF9 Club Edition
+# VinFast Dashboard — VF9 Club Edition
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-22%2B-green)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+Open-source "Digital Twin" dashboard for VinFast EVs — real-time telemetry via MQTT, cross-platform native apps via Tauri.
 
 ---
 
@@ -17,53 +19,51 @@
 > **Tải bản phát hành v1.0.0:**
 >
 > [![Download macOS](<https://img.shields.io/badge/Download-macOS%20(Apple%20Silicon)-111111?style=for-the-badge&logo=apple>)](https://github.com/VF9-Club/VFDashboard/releases/download/v1.0.0/VFDashboard_1.0.0_aarch64.dmg)
->
 > [![Download Windows](https://img.shields.io/badge/Download-Windows%20x64-0078D6?style=for-the-badge&logo=windows)](https://github.com/VF9-Club/VFDashboard/releases/download/v1.0.0/VFDashboard_1.0.0_x64.exe)
->
 > [![Download Android](https://img.shields.io/badge/Download-Android%20APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/VF9-Club/VFDashboard/releases/download/v1.0.0/VFDashboard_1.0.0_aarch64_signed.apk)
 >
-> Giao lưu cùng tác giả: [**ANH EM VF9 - VF9 CLUB**](https://www.facebook.com/groups/706124277686588/)
+> Thảo luận thêm về dự án: [**ANH EM VF9 — VF9 CLUB**](https://www.facebook.com/groups/706124277686588/)
 >
 > _📄 English documentation below._
 
 ---
 
-## 🔄 **Status Update** (February 2026)
+## 📸 Screenshots
 
-> **Dashboard is fully operational with real-time MQTT telemetry!** All vehicle data streams live via MQTT over WebSocket — first data arrives ~500ms after connect.
->
-> ✅ **MQTT Live Telemetry**: Real-time data via AWS IoT Core (battery, doors, tires, location, speed, charging).\
-> ✅ **X-HASH + X-HASH-2**: Dual-layer API signing on all protected endpoints.\
-> ✅ **Multi-Vehicle**: Instant switching between vehicles with cached telemetry.\
-> ✅ **Charging History**: Full session history with smart filtering.\
-> ✅ **Deep Scan**: Progressive telemetry viewer with crowdsourced KV aliases.\
-> 📚 **Documentation**: [API Endpoints](./docs/api/API_ENDPOINTS.md) | [X-HASH Technical Docs](./docs/api/HASH_ANALYSIS_SUMMARY.md) | [MQTT Telemetry](./docs/api/MQTT_TELEMETRY.md)\
-> 🌐 **Bilingual docs**: English at `docs/api/`, Vietnamese at `docs/api/vi/`
+### Desktop / Tablet
 
----
+![Dashboard Preview](docs/assets/dashboard_preview.webp)
 
-## 📖 Introduction
+### Mobile
 
-This project is an open-source dashboard designed specifically for VinFast EV owners. It leverages the vehicle's telemetry data to provide a "Digital Twin" experience, offering real-time insights into battery health, charging status, tire pressure, and environmental conditions.
-
-Our goal is to create a UI that matches the premium quality of the car itself—clean, modern, and informative.
+<table><tr>
+  <td><img src="public/mobile-vf3.webp" alt="Mobile Dashboard — VF3" width="280" /></td>
+  <td><img src="public/mobile-vf9-energy.webp" alt="Mobile Dashboard — VF9 Energy" width="280" /></td>
+  <td><img src="public/mobile-vf3-charging.webp" alt="Mobile — VF3 Charging History" width="280" /></td>
+</tr></table>
 
 ## ✨ Features
 
-- **Digital Twin Visualizer**: Accurate representation of vehicle status including doors, locks, and tires.
-- **Mobile-First Experience**: Optimized specifically for phone screens with zero scrollbars, fixed viewports, and touch-friendly layouts.
-- **Real-time Telemetry via MQTT**: Live streaming of Battery SOC, Range, Speed, Charging status, and more via AWS IoT Core WebSocket.
-- **Safety Monitor**: Integrated alerts for Tire Pressure (TPMS), Door Ajar, and Intrusion.
-- **System Health**: Overview of ECU versions (BMS, Gateway, MHU) and FOTA updates.
-- **Responsive Design**: A "Bento Grid" layout that adapts seamlessly from Desktop to Mobile.
+- **Digital Twin Visualizer** — Accurate representation of vehicle status including doors, locks, and tires.
+- **Real-time Telemetry via MQTT** — Live streaming of Battery SOC, Range, Speed, Charging status via AWS IoT Core WebSocket. First data arrives ~500ms after connect.
+- **Mobile-First Experience** — Optimized for phone screens with zero scrollbars, fixed viewports, and touch-friendly layouts.
+- **Safety Monitor** — Integrated alerts for Tire Pressure (TPMS), Door Ajar, and Intrusion.
+- **Multi-Vehicle Support** — Instant switching between vehicles with cached telemetry.
+- **Charging History** — Full session history with smart filtering.
+- **Deep Scan** — Progressive telemetry viewer with crowdsourced KV aliases.
+- **Cross-Platform Native Apps** — Desktop (macOS, Windows) and Mobile (Android, iOS) via Tauri 2.
+- **X-HASH + X-HASH-2** — Dual-layer API signing on all protected endpoints.
 
 ## 🛠 Tech Stack
 
-- **Core**: Astro 5, React, Tailwind CSS, Nanostores.
-- **Backend**: Serverless Proxy (Astro SSR on Cloudflare Pages) with multi-proxy 429 failover.
-- **Telemetry**: MQTT over WebSocket (AWS IoT Core) — real-time, no polling.
-- **Auth**: Auth0 OAuth2 with HttpOnly cookies (auto-detects localhost for local dev).
-- **Storage**: Cloudflare KV for crowdsourced telemetry aliases.
+| Layer           | Technology                                                                 |
+| --------------- | -------------------------------------------------------------------------- |
+| **Frontend**    | Astro 5, React, Tailwind CSS, Nanostores                                   |
+| **Backend**     | Serverless Proxy (Astro SSR on Cloudflare Pages), multi-proxy 429 failover |
+| **Telemetry**   | MQTT over WebSocket (AWS IoT Core) — real-time, no polling                 |
+| **Auth**        | Auth0 OAuth2, HttpOnly cookies (auto-detects localhost for local dev)      |
+| **Storage**     | Cloudflare KV (crowdsourced telemetry aliases)                             |
+| **Native Apps** | Tauri 2 (Rust) — macOS, Windows, Android, iOS                              |
 
 ## 🏗 System Architecture
 
@@ -71,78 +71,149 @@ Our goal is to create a UI that matches the premium quality of the car itself—
 
 ## 🚀 Quick Start
 
-You can get the whole system running in minutes.
-
 ### Prerequisites
 
-- Node.js v22 or later
+- Node.js v22+
 - A VinFast Connected Car Account
 
-### Installation
-
-1.  **Clone the repository**:
-
-    ```bash
-    git clone https://github.com/VF9-Club/VFDashboard.git
-    cd VFDashboard
-    ```
-
-2.  **Start the Dashboard**:
-    ```bash
-    npm install
-    npm run dev
-    ```
-    _Dashboard will open at `http://localhost:4321`_
-
-### Deployment
-
-To deploy the dashboard to Cloudflare Pages:
+### Install & Run
 
 ```bash
+git clone https://github.com/VF9-Club/VFDashboard.git
+cd VFDashboard
+npm install
+npm run dev
+```
+
+Dashboard opens at `http://localhost:4321`.
+
+## 📦 Native Builds (Tauri)
+
+VFDashboard ships as a native app on all major platforms via [Tauri 2](https://v2.tauri.app/).
+
+### Common Prerequisites
+
+- Node.js v22+
+- Rust toolchain (stable) — [install](https://rustup.rs/)
+- Tauri CLI (bundled via `@tauri-apps/cli` in devDependencies)
+
+### macOS (Apple Silicon / Intel)
+
+```bash
+# Install Xcode Command Line Tools (if not already)
+xcode-select --install
+
+# Build
+npm install
+npm run tauri build
+
+# Or target a specific architecture
+npm run tauri build -- --target aarch64-apple-darwin   # Apple Silicon
+npm run tauri build -- --target x86_64-apple-darwin    # Intel
+```
+
+Output: `src-tauri/target/release/bundle/dmg/*.dmg`
+
+### Windows (x64)
+
+Requires a Windows machine (no cross-compilation from macOS).
+
+```powershell
+# Prerequisites
+winget install Rustlang.Rustup
+winget install Microsoft.VisualStudio.2022.BuildTools   # "Desktop development with C++" workload
+winget install Microsoft.EdgeWebView2Runtime             # Usually pre-installed on Win 11
+
+rustup default stable-x86_64-pc-windows-msvc
+
+# Build
+npm install
+npm run tauri:build:win
+```
+
+Output: `src-tauri\target\release\bundle\nsis\*.exe` and `msi\*.msi`
+
+Detailed guide: [`docs/TAURI_WINDOWS_BUILD.md`](docs/TAURI_WINDOWS_BUILD.md)
+
+### Android (APK)
+
+```bash
+# Prerequisites: Android SDK, NDK, Java JDK
+# Initialize Android project (one-time)
+npx tauri android init
+
+# Build signed APK
+ANDROID_KEYSTORE_PATH="$HOME/.android/vfdashboard-upload.jks" \
+ANDROID_KEY_ALIAS="vfdashboard" \
+ANDROID_KEYSTORE_PASSWORD="YOUR_PASSWORD" \
+ANDROID_KEY_PASSWORD="YOUR_PASSWORD" \
+npm run tauri:build:android:signed
+```
+
+Output: `src-tauri/gen/android/app/build/outputs/apk/universal/release/VFDashboard_*_signed.apk`
+
+Detailed guide: [`docs/TAURI_ANDROID_SIGNING.md`](docs/TAURI_ANDROID_SIGNING.md)
+
+### iOS
+
+> **Note:** Requires macOS with Xcode installed. Apple Developer account needed for device deployment.
+
+```bash
+# Initialize iOS project (one-time)
+npx tauri ios init
+
+# Development (simulator)
+npx tauri ios dev
+
+# Production build
+npx tauri ios build
+```
+
+Output: Xcode project at `src-tauri/gen/apple/`. Open in Xcode for simulator testing or archive for App Store / Ad Hoc distribution.
+
+### Upload Build Artifacts to GitHub Release
+
+```bash
+# Authenticate (one-time)
+gh auth login
+
+# Upload to existing release
+gh release upload v1.0.0 <artifact-path> --clobber
+
+# Or create a new release
+gh release create v1.1.0 --draft --title "VFDashboard 1.1.0" <artifact-paths>
+```
+
+## ☁️ Deployment (Cloudflare Pages)
+
+```bash
+npx wrangler login   # One-time auth
 npm run deploy
 ```
 
-_Note: Requires Cloudflare authentication (`npx wrangler login`)._
+## 📚 Documentation
 
-### Update Windows build from a Windows machine
+| Document                                                     | Description                           |
+| ------------------------------------------------------------ | ------------------------------------- |
+| [API Endpoints](./docs/api/API_ENDPOINTS.md)                 | REST API reference                    |
+| [MQTT Telemetry](./docs/api/MQTT_TELEMETRY.md)               | Real-time data via AWS IoT Core       |
+| [X-HASH Technical Docs](./docs/api/HASH_ANALYSIS_SUMMARY.md) | Dual-layer API signing analysis       |
+| [Proxy Failover](./docs/api/PROXY_FAILOVER.md)               | Multi-proxy 429 failover architecture |
+| [Tauri Windows Build](./docs/TAURI_WINDOWS_BUILD.md)         | Windows native build guide            |
+| [Tauri Android Signing](./docs/TAURI_ANDROID_SIGNING.md)     | Android signed APK guide              |
+| [Cloudflare Deployment](./docs/DEPLOY_CLOUDFLARE.md)         | Cloudflare Pages setup                |
 
-```powershell
-npm install
-npm run tauri:build:win
-gh auth login
-gh release upload v1.0.0 .\src-tauri\target\release\bundle\nsis\*.exe .\src-tauri\target\release\bundle\msi\*.msi --clobber
-```
-
-Detailed guide: `docs/TAURI_WINDOWS_BUILD.md`
-
-## ⚠ Disclaimer
-
-**This software is not affiliated with, endorsed by, or connected to VinFast Auto or its subsidiaries.**
-It is an unofficial, open-source project created by the community for educational and personal use. Use at your own risk.
-
-## 📸 Screenshots
-
-### Dashboard (PC / Tablet)
-
-![Dashboard Preview](docs/assets/dashboard_preview.webp)
-
-### Mobile & Detail View
-
-<table><tr>
-  <td><img src="public/mobile-vf3.webp" alt="Mobile Dashboard - VF3" width="280" /></td>
-  <td><img src="public/mobile-vf9-energy.webp" alt="Mobile Dashboard - VF9 Energy" width="280" /></td>
-  <td><img src="public/mobile-vf3-charging.webp" alt="Mobile - VF3 Charging History" width="280" /></td>
-</tr></table>
+🌐 Vietnamese translations available at `docs/api/vi/`.
 
 ## 🤝 Contributing
 
 We welcome contributions from the community!
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 🌍 Community Forks
 
@@ -160,11 +231,13 @@ This project was developed based on inspiration and valuable technical documenta
 
 Selected improvements from community forks are periodically reviewed and backported into this public branch when they align with security, maintainability, and broad community usage.
 
-We warmly welcome all VinFast owners and technology enthusiasts to collaborate and help improve the public dashboard experience.
+## ⚠️ Disclaimer
+
+**This software is not affiliated with, endorsed by, or connected to VinFast Auto or its subsidiaries.** It is an unofficial, open-source project created by the community for educational and personal use. Use at your own risk.
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
 ---
 
