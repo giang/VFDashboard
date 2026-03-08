@@ -13,10 +13,15 @@ export default defineConfig({
     enabled: false,
   },
   integrations: [react()],
-
+  site: 'https://giang.github.io',
+  base: '/VFDashboard',
+  output: 'static',
   vite: {
     plugins: [tailwindcss()],
-  },
+    ssr: {
+      external: ['mqtt']  // Giữ lại vì project có mqtt
+    }
+  }
 
   adapter: cloudflare({
     imageService: "compile",
