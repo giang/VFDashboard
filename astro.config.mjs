@@ -13,8 +13,8 @@ export default defineConfig({
     enabled: false,
   },
   integrations: [react()],
-  site: 'https://giang.github.io',
-  base: '/VFDashboard',
+  site: 'https://vf7.ssl.casa',
+  base: '/',
   vite: {
     plugins: [tailwindcss()],
     ssr: {
