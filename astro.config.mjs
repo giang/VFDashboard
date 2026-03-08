@@ -8,21 +8,19 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "static",
   devToolbar: {
     enabled: false,
   },
   integrations: [react()],
   site: 'https://giang.github.io',
   base: '/VFDashboard',
-  output: 'static',
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      external: ['mqtt']  // Giữ lại vì project có mqtt
+      external: ['mqtt']
     }
-  }
-
+  },
   adapter: cloudflare({
     imageService: "compile",
     sessionKVBindingName: "VFDashboard",
